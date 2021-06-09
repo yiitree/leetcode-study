@@ -42,6 +42,7 @@ public class E1046最后一块石头的重量 {
         return stones[len];
          */
 
+        // 最大顶针队列，其实就是会添加的时候自动排序。
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
         for (int stone : stones) {
             pq.offer(stone);
