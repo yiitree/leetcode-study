@@ -8,7 +8,7 @@ public class DP {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,4,1,7,8,3};
-        final int opt = dp_opt(arr, 6);
+        final int opt = rec_opt(arr, 6);
         System.out.println(opt);
 
     }
@@ -31,6 +31,7 @@ public class DP {
         // 其他情况：选/不选
         // 选
         int a = rec_opt(arr, i - 2) + arr[i];
+        // 不选
         int b = rec_opt(arr, i - 1);
         return Math.max(a, b);
     }
@@ -46,7 +47,9 @@ public class DP {
         opt[1] = Math.max(arr[0],arr[1]);
 
         for (int j = 2; j < arr.length; j++) {
+            // 选
             int a = opt[j - 2] + arr[j];
+            // 不选
             int b = opt[j - 1];
             opt[j] = Math.max(a, b);
         }
