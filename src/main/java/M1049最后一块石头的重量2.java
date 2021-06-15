@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 /**
  * 1049. 最后一块石头的重量 II
@@ -16,18 +16,47 @@ import java.util.Arrays;
 public class M1049最后一块石头的重量2 {
 
     public static int lastStoneWeightII(int[] stones) {
-        // 排序
-        final int[] tmp = Arrays.stream(stones).sorted().toArray();
-        int tV;
-        for (int i = tmp.length - 1; i >= 1; i--) {
-            tV = tmp[i];
-            tmp[i - 1] = Math.abs(tV - tmp[i - 1]);
+//        // 排序
+//        final int[] tmp = Arrays.stream(stones).sorted().toArray();
+//        int tV;
+//        for (int i = tmp.length - 1; i >= 1; i--) {
+//            tV = tmp[i];
+//            tmp[i - 1] = Math.abs(tV - tmp[i - 1]);
+//        }
+//        return tmp[0];
+
+
+        // 所有石头总重
+        int sum = 0;
+        for (int weight : stones) {
+            sum += weight;
         }
-        return tmp[0];
+        // 石头个数
+        int n = stones.length;
+        // 一半石头重量
+        int m = sum / 2;
+
+        boolean[][] dp = new boolean[n + 1][m + 1];
+        dp[0][0] = true;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j <= m; ++j) {
+                if (j < stones[i]) {
+                    dp[i + 1][j] = dp[i][j];
+                } else {
+                    dp[i + 1][j] = dp[i][j] || dp[i][j - stones[i]];
+                }
+            }
+        }
+        for (int j = m;; --j) {
+            if (dp[n][j]) {
+                return sum - 2 * j;
+            }
+        }
     }
 
     public static void main(String[] args) {
         System.out.println(lastStoneWeightII(new int[]{31,26,33,21,40}));
     }
+
 
 }
