@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -17,34 +16,40 @@ import java.util.List;
 public class M2两数相加 {
 
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2,new ListNode(4,new ListNode(3,new ListNode(5))));
-        ListNode l2 = new ListNode(5,new ListNode(6,new ListNode(4)));
-        addTwoNumbers(l1, l2).forEach(System.out::println);
+        ListNode l1 = new ListNode(9,new ListNode(9,new ListNode(9,new ListNode(9))));
+        ListNode l2 = new ListNode(9,new ListNode(9));
+        addTwoNumbers(l1, l2);
     }
 
-    public static List<Integer> addTwoNumbers(ListNode l1, ListNode l2) {
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode();
         ListNode p1 = l1;
         ListNode p2 = l2;
-        List<Integer> list = new ArrayList<>();
-        int tmp = 0;
-        while (p1 != null || p2 != null){
+        int flag = 0;
+        while ((p1 != null || p2 != null) || flag!=0){
             int s1 = p1 == null ? 0 : p1.val;
             int s2 = p2 == null ? 0 : p2.val;
             int count;
-            int s = s1 + s2;
+            int s = s1 + s2 + flag;
             if(s >= 10){
                 s -= 10;
-                count = s + tmp;
-                tmp = 1;
+                count = s;
+                flag = 1;
             }else {
-                count = s + tmp;
-                tmp = 0;
+                count = s;
+                flag = 0;
             }
-            list.add(count);
+            ListNode tmp = result;
+            while(tmp.next != null){
+                tmp = tmp.next;
+            }
+            tmp.next = new ListNode(count);
+
             p1 = p1 == null ? null : p1.next;
             p2 = p2 == null ? null : p2.next;
         }
-        return list;
+        result = result.next;
+        return result;
     }
 
 
