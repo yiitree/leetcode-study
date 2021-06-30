@@ -6,53 +6,136 @@ import java.util.*;
  */
 public class M剑指office38字符串的排序 {
     public static void main(String[] args) {
-        for (Object o : permutation("123")) {
-            System.out.println(o);
-        }
+        new M剑指office38字符串的排序().permutation("123");
+//        for (Object o : permutation("123")) {
+//            System.out.println(o);
+//        }
 //        Arrays.stream(permutation("123")).forEach(System.out::println);
+    }
 
+
+//    /**
+//     //     * 取值，第一次去第一个值，然后把改值去掉
+//     //     * @param s
+//     //     * @return
+//     //     */
+//    public static Object[] permutation(String s) {
+//            ss(s);
+//        return null;
+//    }
+//
+//
+//
+//    public static String dfs (String s,int index){
+//        StringBuilder stringBuilder = new StringBuilder(s);
+//        c = stringBuilder.charAt(index);
+//        stringBuilder.deleteCharAt(index);
+//        return stringBuilder.toString();
+//    }
+//
+//    static char c;
+//    public static List<StringBuilder> list = new ArrayList<>();
+//    public static StringBuilder stringBuilder = new StringBuilder();
+//    public static String dfs;
+//
+//    public static void ss(String s){
+//        for (int m = 0; m < s.length(); m++) {
+//            dfs = dfs(s,m);
+//            stringBuilder.append(c);
+//        }
+//    }
+
+
+
+
+
+
+
+
+
+    List<String> res = new LinkedList<>();
+    char[] c;
+    public String[] permutation(String s) {
+        c = s.toCharArray();
+        dfs(0);
+        return res.toArray(new String[res.size()]);
     }
 
     /**
-     * 取值，第一次去第一个值，然后把改值去掉
-     * @param s
-     * @return
+     * 深度优先搜索（回溯法）
+     * @param x
      */
-    public static Object[] permutation(String s) {
-        List<Map<Integer,Character>> list = new ArrayList<>();
-        // 第一个字母按照顺序，剩下的就从头开始取
-        for (int m = 0; m < s.length(); m++) {
-            // 把第m个字母放在第一位
-            for (int i = 0; i < s.length(); i++) {
-                StringBuilder stringBuilder = new StringBuilder(s);
-                Map<Integer,Character> newStr = new HashMap<>(s.length());
-                newStr.put(i, stringBuilder.charAt(m));
-                stringBuilder.deleteCharAt(m);
-                // 剩下字母一直从第一个开始取
-                for (int j = 0; j < s.length()-1; j++) {
-                    if(j >= i){
-                        newStr.put(j+1,stringBuilder.charAt(0));
-                    }else {
-                        newStr.put(j,stringBuilder.charAt(0));
-                    }
-                    stringBuilder.deleteCharAt(0);
-                }
-                list.add(newStr);
-            }
+    void dfs(int x) {
+        // 搜索完毕 只有一个字母，直接返回
+        if(x == c.length - 1) {
+            // 添加排列方案
+            res.add(String.valueOf(c));
+            return;
         }
-        List<StringBuilder> ss = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
-        list.forEach(l->{
-            l.keySet().forEach(
-                    c ->{
-                        stringBuilder.append(l.get(c));
-                        ss.add(stringBuilder);
-                    });
-
-        });
-        Object[] as = ss.stream().distinct().toArray();
-        return as;
+        HashSet<Character> set = new HashSet<>();
+        for(int i = x; i < c.length; i++) {
+            // 重复，因此剪枝
+            if(set.contains(c[i])) {
+                continue;
+            }
+            set.add(c[i]);
+            // 交换，将 c[i] 固定在第 x 位
+            swap(i, x);
+            // 开启固定第 x + 1 位字符
+            dfs(x + 1);
+            // 恢复交换
+            swap(i, x);
+        }
     }
+
+    void swap(int a, int b) {
+        char tmp = c[a];
+        c[a] = c[b];
+        c[b] = tmp;
+    }
+
+//
+//
+//    /**
+//     * 取值，第一次去第一个值，然后把改值去掉
+//     * @param s
+//     * @return
+//     */
+//    public static Object[] permutation(String s) {
+//        List<Map<Integer,Character>> list = new ArrayList<>();
+//        // 第一个字母按照顺序，剩下的就从头开始取
+//        for (int m = 0; m < s.length(); m++) {
+//            // 把第m个字母放在第一位
+//            for (int i = 0; i < s.length(); i++) {
+//                StringBuilder stringBuilder = new StringBuilder(s);
+//                Map<Integer,Character> newStr = new HashMap<>(s.length());
+//                newStr.put(i, stringBuilder.charAt(m));
+//                stringBuilder.deleteCharAt(m);
+//                // 剩下字母一直从第一个开始取
+//                for (int j = 0; j < s.length()-1; j++) {
+//                    if(j >= i){
+//                        newStr.put(j+1,stringBuilder.charAt(0));
+//                    }else {
+//                        newStr.put(j,stringBuilder.charAt(0));
+//                    }
+//                    stringBuilder.deleteCharAt(0);
+//                }
+//                list.add(newStr);
+//            }
+//        }
+//        List<StringBuilder> ss = new ArrayList<>();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        list.forEach(l->{
+//            l.keySet().forEach(
+//                    c ->{
+//                        stringBuilder.append(l.get(c));
+//                        ss.add(stringBuilder);
+//                    });
+//
+//        });
+//        Object[] as = ss.stream().distinct().toArray();
+//        return as;
+//    }
 
 
 
