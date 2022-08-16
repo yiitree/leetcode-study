@@ -1,4 +1,4 @@
-package 贪心算法;
+package leetcode.贪心算法;
 
 import java.util.Arrays;
 

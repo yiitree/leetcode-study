@@ -1,3 +1,5 @@
+package leetcode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +23,6 @@ public class M15三数之和 {
         }
         // 外层循环
         for (int i = 0; i < nums.length; i++) {
-
             // 第二层循环 --- 在相同的时候去重
             for (int j = i + 1; j < nums.length; j++) {
                 // 存在两数之和，并且不是这两个

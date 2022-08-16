@@ -1,4 +1,4 @@
-package 动态规划;
+package leetcode.动态规划;
 
 /**
  * @Author: 曾睿

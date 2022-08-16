@@ -1,3 +1,5 @@
+package leetcode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class M03无重复字符的最长子串 {
                     break;
                 }
                 if(s.length()-1 == j){
-                    max = Math.max(max, s.length()-i);;
+                    max = Math.max(max, s.length()-i);
                 }
                 result++;
             }

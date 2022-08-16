@@ -1,4 +1,4 @@
-package bfs1dfs;
+package leetcode.bfs1dfs;
 
 import java.util.*;
 

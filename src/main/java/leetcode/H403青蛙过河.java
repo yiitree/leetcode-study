@@ -1,3 +1,5 @@
+package leetcode;
+
 /**
  * @Author: 曾睿
  * @Date: 2021/6/9 10:17

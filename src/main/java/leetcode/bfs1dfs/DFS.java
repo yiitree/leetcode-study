@@ -1,4 +1,4 @@
-package bfs1dfs;
+package leetcode.bfs1dfs;
 
 import java.util.*;
 
@@ -53,5 +53,30 @@ public class DFS {
             System.out.print(pop);
         }
     }
+
+//    /**
+//     * DFS深度优先
+//     * @param graph
+//     * @param start
+//     * @return
+//     */
+//    static void bfs1(HashMap<String,String []> graph, String start){
+//        String begin = start;
+//        // 设置一个已经遍历的集合
+//        List<String> seen = new ArrayList<>();
+//        seen.add(begin);
+//
+//        // 保存子节点
+//
+//        // 用于保存要遍历节点的子节点
+//        Stack<String> childs = new Stack<>();
+//        String[] childs = graph.get(start);
+//
+//
+//        for (String child : childs) {
+//            childs.push(child);
+//        }
+//
+//    }
 
 }
